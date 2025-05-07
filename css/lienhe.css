@@ -1,0 +1,8 @@
+.mt-3 input{
+   height: 50px;
+   border-radius: 20px;
+   border: 1px solid gray;
+}
+.mt-3 textarea{
+    border-radius: 20px;
+}

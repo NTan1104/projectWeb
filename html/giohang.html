@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giỏ Hàng - Xe Đạp Điện BLANC</title>
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/fontawesome.css">
+    <script src="../js/bootstrap.bundle.min.js"></script>
+    <script src="../js/jquery-3.7.1.min.js"></script>
+
+    <style>
+        @font-face {
+            font-family: 'Font Awesome 6 Free';
+            font-style: normal;
+            font-weight: 900;
+            src: url('../css/webfonts/fa-solid-900.woff2') format('woff2'),
+                 url('../css/webfonts/fa-solid-900.ttf') format('ttf');
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #007bff, #00d4ff);
+            padding: 15px 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        header h1 {
+            color: white;
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin: 0;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        header ul {
+            display: flex;
+            gap: 15px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        header ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        header ul li a:hover {
+            color: #ffd700;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .header-actions input[type="text"] {
+            padding: 6px 12px;
+            border-radius: 20px;
+            border: none;
+            outline: none;
+            width: 180px;
+            font-size: 0.85rem;
+        }
+
+        .header-actions i {
+            font-size: 1.1rem;
+            cursor: pointer;
+            color: white;
+            transition: transform 0.3s ease;
+        }
+
+        .header-actions i:hover {
+            transform: scale(1.15);
+        }
+
+        .auth-buttons .btn-auth {
+            padding: 6px 12px;
+            border-radius: 5px;
+            font-size: 0.85rem;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            transition: background-color 0.3s;
+        }
+
+        .auth-buttons .btn-auth:hover {
+            background-color: #0056b3;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            color: white;
+            font-size: 0.85rem;
+            gap: 8px;
+        }
+
+        .user-info span {
+            max-width: 120px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .logout-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 0.85rem;
+            cursor: pointer;
+            padding: 6px 12px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            background-color: #dc3545;
+        }
+
+        /* Main Content */
+        main {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 15px;
+        }
+
+        main h2 {
+            text-align: center;
+            color: #333;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        /* Cart Items */
+        .cart-item {
+            display: grid;
+            grid-template-columns: 60px 2fr 1fr 1fr 1fr 80px;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            background: white;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+
+        .cart-item img {
+            width: 50px;
+            height: auto;
+        }
+
+        .cart-item div {
+            text-align: center;
+        }
+
+        .cart-item .quantity-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .cart-item .quantity-controls button {
+            width: 28px;
+            height: 28px;
+            font-size: 14px;
+        }
+
+        .cart-total {
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-top: 15px;
+            text-align: right;
+        }
+
+        /* Checkout Form */
+        .checkout-form {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-top: 30px;
+        }
+
+        .checkout-form h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .checkout-form .form-group {
+            margin-bottom: 15px;
+        }
+
+        .checkout-form label {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .checkout-form input,
+        .checkout-form select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 0.9rem;
+        }
+
+        .checkout-form .btn-checkout {
+            width: 100%;
+            padding: 10px;
+            font-size: 1rem;
+            border-radius: 5px;
+            background: #007bff;
+            border: none;
+            color: white;
+            transition: background 0.3s ease;
+        }
+
+        .checkout-form .btn-checkout:hover {
+            background: #0056b3;
+        }
+
+        /* Modal Styling */
+        .modal-content {
+            border-radius: 10px;
+        }
+
+        .modal-body .row {
+            margin-bottom: 15px;
+        }
+
+        .modal-body input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 0.9rem;
+        }
+
+        .modal-body .text-danger {
+            font-size: 0.8rem;
+        }
+
+        .modal-footer .btn {
+            padding: 8px 16px;
+            font-size: 0.9rem;
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: white;
+            padding: 30px 0;
+            margin-top: 40px;
+        }
+
+        footer .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 2fr 1.5fr 1fr;
+            gap: 20px;
+        }
+
+        footer ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        footer ul li {
+            margin-bottom: 8px;
+        }
+
+        footer ul li a {
+            color: #ddd;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        footer ul li a:hover {
+            color: #007bff;
+        }
+
+        footer h5 {
+            color: #007bff;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+        }
+
+        footer img {
+            max-width: 200px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>BLANC</h1>
+            <ul>
+                <li><a href="../html/trangchu.html">TRANG CHỦ</a></li>
+                <li><a href="../html/video.html">VIDEO</a></li>
+                <li><a href="../html/sanpham1.html">SẢN PHẨM</a></li>
+                <li><a href="../html/review.html">REVIEW</a></li>
+                <li><a href="../html/gioithieu.html">GIỚI THIỆU</a></li>
+                <li><a href="../html/lienhe.html">LIÊN HỆ</a></li>
+            </ul>
+            <div class="header-actions">
+                <input type="text" placeholder="Tìm kiếm xe đạp...">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <a href="../html/giohang.html"><i class="fas fa-shopping-cart"></i></a>
+                <div id="auth-buttons" class="auth-buttons">
+                    <button type="button" class="btn-auth" data-bs-toggle="modal" data-bs-target="#modalDangKy">Đăng Ký</button>
+                    <button type="button" class="btn-auth" data-bs-toggle="modal" data-bs-target="#modalDangNhap">Đăng Nhập</button>
+                </div>
+                <div id="user-info" class="user-info" style="display: none;">
+                    <span id="user-name"></span>
+                    <span id="user-email"></span>
+                    <button class="logout-btn" id="logout-btn">Đăng Xuất</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Registration Modal -->
+    <div class="modal fade" id="modalDangKy" tabindex="-1" aria-labelledby="modalTitleId" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" style="max-width: 500px;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitleId">Đăng Ký Thông Tin</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-4 text-end">Họ Và Tên</div>
+                        <div class="col-8">
+                            <input type="text" name="input_Name" id="input_Name">
+                            <span class="text-danger" id="errName">*</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4 text-end">Số Điện Thoại</div>
+                        <div class="col-8">
+                            <input type="text" name="input_Phone" id="input_Phone">
+                            <span class="text-danger" id="errPhone">*</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4 text-end">Email</div>
+                        <div class="col-8">
+                            <input type="text" name="input_Email" id="input_Email">
+                            <span class="text-danger" id="errEmail">*</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4 text-end">Địa Chỉ</div>
+                        <div class="col-8">
+                            <input type="text" name="input_Address" id="input_Address">
+                            <span class="text-danger" id="errAddress">*</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4 text-end">Tài Khoản</div>
+                        <div class="col-8">
+                            <input type="text" name="input_Taikhoan" id="input_Taikhoan">
+                            <span class="text-danger" id="errTaikhoan">*</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4 text-end">Mật khẩu</div>
+                        <div class="col-8">
+                            <input type="password" name="input_Password" id="input_Password">
+                            <span class="text-danger" id="errPassword">*</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4 text-end">Nhập lại mật khẩu</div>
+                        <div class="col-8">
+                            <input type="password" name="input_Repeatpass" id="input_Repeatpass">
+                            <span class="text-danger" id="errRepeatpass">*</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                    <button type="button" class="btn btn-primary" id="btn_submit">Lưu</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div class="modal fade" id="modalDangNhap" tabindex="-1" aria-labelledby="modalTitleId" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" style="max-width: 500px;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitleId">Đăng Nhập</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-4 text-end">Tài Khoản</div>
+                        <div class="col-8">
+                            <input type="text" name="txt_TaiKhoan" id="txt_Taikhoan">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4 text-end">Mật khẩu</div>
+                        <div class="col-8">
+                            <input type="password" name="txt_Password" id="txt_Password">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                    <button type="button" class="btn btn-primary" id="btn_dangnhap">Đăng Nhập</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main>
+        <h2>Giỏ Hàng</h2>
+        <div id="cart-items"></div>
+        <div class="cart-total" id="cart-total"></div>
+        <div class="checkout-form">
+            <h3>Thanh Toán</h3>
+            <div class="form-group">
+                <label for="checkout-name">Họ và Tên</label>
+                <input type="text" id="checkout-name" placeholder="Nhập họ và tên" required>
+            </div>
+            <div class="form-group">
+                <label for="checkout-phone">Số Điện Thoại</label>
+                <input type="text" id="checkout-phone" placeholder="Nhập số điện thoại" required>
+            </div>
+            <div class="form-group">
+                <label for="checkout-address">Địa Chỉ Giao Hàng</label>
+                <input type="text" id="checkout-address" placeholder="Nhập địa chỉ giao hàng" required>
+            </div>
+            <div class="form-group">
+                <label for="payment-method">Phương Thức Thanh Toán</label>
+                <select id="payment-method" required>
+                    <option value="" disabled selected>Chọn phương thức thanh toán</option>
+                    <option value="cod">Thanh toán khi nhận hàng (COD)</option>
+                    <option value="bank">Chuyển khoản ngân hàng</option>
+                    <option value="momo">Ví MoMo</option>
+                </select>
+            </div>
+            <button class="btn-checkout" id="btn-checkout">Xác Nhận Thanh Toán</button>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div>
+                <img src="../img/footerlogo.webp" alt="Logo">
+            </div>
+            <div>
+                <ul>
+                    <li><h5>HỘ KINH DOANH BLANC BIKE</h5></li>
+                    <li>GPKD số: 58A8011955</li>
+                    <li>Ngày cấp: 01/10/2021</li>
+                    <li>Cấp bởi: UBND TP Trà Vinh</li>
+                    <li><i class="fa-solid fa-landmark"></i> 77 Điện Biên Phủ, P.6, Trà Vinh</li>
+                    <li><i class="fa-solid fa-phone"></i> 0399297981</li>
+                    <li style="letter-spacing: 5px;">
+                        <i class="fa-brands fa-facebook"></i>
+                        <i class="fa-brands fa-yahoo"></i>
+                        <i class="fa-brands fa-twitter"></i>
+                        <i class="fa-brands fa-instagram"></i>
+                        <i class="fa-brands fa-youtube"></i>
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <ul>
+                    <h5>HỖ TRỢ KHÁCH HÀNG</h5>
+                    <li><a href="../html/baomat.html">Chính sách bảo mật</a></li>
+                    <li><a href="../html/vanchuyen.html">Chính sách vận chuyển</a></li>
+                    <li><a href="../html/doitra.html">Chính sách đổi trả</a></li>
+                    <li><a href="../html/hinhthucthanhtoan.html">Hình thức thanh toán</a></li>
+                    <li><a href="http://online.gov.vn/Home/WebDetails/73279" target="_blank"><img src="../img/BCT.webp" alt=""></a></li>
+                </ul>
+            </div>
+            <div>
+                <ul>
+                    <h5>HƯỚNG DẪN</h5>
+                    <li><a href="../html/muahang.html">Hướng dẫn mua hàng</a></li>
+                    <li><a href="../html/muahang.html">Hướng dẫn thanh toán</a></li>
+                    <li><a href="../html/muahang.html">Hướng dẫn giao nhận</a></li>
+                    <li><a href="../html/dieukhoandichvu.html">Điều khoản dịch vụ</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        $(document).ready(function(){
+            const MAX_QUANTITY = 10;
+
+            function displayCart() {
+                const cart = JSON.parse(localStorage.getItem('cart')) || [];
+                const cartItems = $('#cart-items');
+                cartItems.empty();
+
+                if (cart.length === 0) {
+                    cartItems.html('<p>Giỏ hàng trống!</p>');
+                    $('#cart-total').text('');
+                    $('.checkout-form').hide();
+                    return;
+                }
+
+                $('.checkout-form').show();
+                let total = 0;
+                cart.forEach(item => {
+                    const itemTotal = item.price * item.quantity;
+                    total += itemTotal;
+                    cartItems.append(`
+                        <div class="cart-item" data-id="${item.id}">
+                            <img src="${item.image}" alt="${item.name}">
+                            <div>${item.name}</div>
+                            <div>${item.price} triệu VNĐ</div>
+                            <div class="quantity-controls">
+                                <button class="btn btn-sm btn-outline-secondary btn-decrease">-</button>
+                                <span>${item.quantity}</span>
+                                <button class="btn btn-sm btn-outline-secondary btn-increase">+</button>
+                            </div>
+                            <div>${itemTotal.toFixed(1)} triệu VNĐ</div>
+                            <button class="btn btn-sm btn-danger btn-remove">Xóa</button>
+                        </div>
+                    `);
+                });
+
+                $('#cart-total').text(`Tổng cộng: ${total.toFixed(1)} triệu VNĐ`);
+            }
+
+            function populateCheckoutForm() {
+                const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+                if (currentUser) {
+                    $('#checkout-name').val(currentUser.name);
+                    $('#checkout-phone').val(currentUser.phone);
+                    $('#checkout-address').val(currentUser.address);
+                } else {
+                    $('#checkout-name, #checkout-phone, #checkout-address').val('');
+                }
+            }
+
+            $(document).on('click', '.btn-increase', function() {
+                const cartItem = $(this).closest('.cart-item');
+                const productId = cartItem.data('id');
+                let cart = JSON.parse(localStorage.getItem('cart')) || [];
+                const item = cart.find(item => item.id == productId);
+
+                if (item.quantity >= MAX_QUANTITY) {
+                    alert(`Số lượng tối đa cho ${item.name} là ${MAX_QUANTITY}!`);
+                    return;
+                }
+
+                item.quantity += 1;
+                localStorage.setItem('cart', JSON.stringify(cart));
+                displayCart();
+            });
+
+            $(document).on('click', '.btn-decrease', function() {
+                const cartItem = $(this).closest('.cart-item');
+                const productId = cartItem.data('id');
+                let cart = JSON.parse(localStorage.getItem('cart')) || [];
+                const item = cart.find(item => item.id == productId);
+
+                if (item.quantity > 1) {
+                    item.quantity -= 1;
+                } else {
+                    cart = cart.filter(item => item.id != productId);
+                }
+
+                localStorage.setItem('cart', JSON.stringify(cart));
+                displayCart();
+            });
+
+            $(document).on('click', '.btn-remove', function() {
+                const cartItem = $(this).closest('.cart-item');
+                const productId = cartItem.data('id');
+                let cart = JSON.parse(localStorage.getItem('cart')) || [];
+                cart = cart.filter(item => item.id != productId);
+
+                localStorage.setItem('cart', JSON.stringify(cart));
+                displayCart();
+            });
+
+            $('#btn-checkout').on('click', function() {
+                const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+                const cart = JSON.parse(localStorage.getItem('cart')) || [];
+                const name = $('#checkout-name').val();
+                const phone = $('#checkout-phone').val();
+                const address = $('#checkout-address').val();
+                const paymentMethod = $('#payment-method').val();
+
+                if (!currentUser) {
+                    alert('Vui lòng đăng nhập để thanh toán!');
+                    $('#modalDangNhap').modal('show');
+                    return;
+                }
+
+                if (cart.length === 0) {
+                    alert('Giỏ hàng trống!');
+                    return;
+                }
+
+                if (!name || !phone || !address || !paymentMethod) {
+                    alert('Vui lòng điền đầy đủ thông tin thanh toán!');
+                    return;
+                }
+
+                // Simulate checkout process
+                localStorage.removeItem('cart');
+                displayCart();
+                alert('Thanh toán thành công! Cảm ơn bạn đã mua hàng.');
+                $('#checkout-name, #checkout-phone, #checkout-address, #payment-method').val('');
+            });
+
+            function checkLoginStatus() {
+                const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+                if (currentUser) {
+                    $('#auth-buttons').hide();
+                    $('#user-info').show();
+                    $('#user-name').text(currentUser.name);
+                    $('#user-email').text(currentUser.email);
+                    populateCheckoutForm();
+                } else {
+                    $('#auth-buttons').show();
+                    $('#user-info').hide();
+                    populateCheckoutForm();
+                }
+            }
+
+            $('#logout-btn').on('click', function() {
+                localStorage.removeItem('currentUser');
+                $('#auth-buttons').show();
+                $('#user-info').hide();
+                $('#user-name').text('');
+                $('#user-email').text('');
+                alert('Đăng Xuất Thành Công!');
+                populateCheckoutForm();
+            });
+
+            function login(taikhoan, password) {
+                const accounts = JSON.parse(localStorage.getItem('accounts')) || [];
+                return accounts.find(account => account.taikhoan === taikhoan.trim() && account.password === password.trim());
+            }
+
+            $('#btn_dangnhap').on('click', function() {
+                const taikhoan = $('#txt_Taikhoan').val();
+                const password = $('#txt_Password').val();
+                if (taikhoan === '' || password === '') {
+                    alert('Vui lòng nhập đầy đủ tài khoản và mật khẩu!');
+                    return;
+                }
+                const user = login(taikhoan, password);
+                if (user) {
+                    localStorage.setItem('currentUser', JSON.stringify(user));
+                    alert('Đăng Nhập Thành Công!');
+                    $('#modalDangNhap').modal('hide');
+                    $('#auth-buttons').hide();
+                    $('#user-info').show();
+                    $('#user-name').text(user.name);
+                    $('#user-email').text(user.email);
+                    $('#txt_Taikhoan, #txt_Password').val('');
+                    populateCheckoutForm();
+                } else {
+                    alert('Tài khoản hoặc mật khẩu không đúng!');
+                }
+            });
+
+            function checkName() {
+                const regex = /^([A-ZĐÂĂÊÔƠƯÁÀẢÃẠẮẰẲẴẶẤẦẨẪẬÉÈẺẼẸÍÌỈĨỊÓÒỎÕỌỐỒỔỖỘỚỜỞỠỢÚÙỦŨỤÝỲỶỸỴ][a-záàảãạăắằẳẵặâấầẩẫậêéèẻẽẹếềểễệíìỉĩịóòỏõọôốồổỗộơớờởỡợúùủũụưứừửữựýỳỷỹỵ]+(\s)*)*([A-ZĐÂĂÊÔƠƯÁÀẢÃẠẮẰẲẴẶẤẦẨẪẬÉÈẺẼẸÍÌỈĨỊÓÒỎÕỌỐỒỔỖỘỚỜỞỠỢÚÙỦŨỤÝỲỶỸỴ][a-záàảãạăắằẳẵặâấầẩẫậêéèẻẽẹếềểễệíìỉĩịóòỏõọôốồổỗộơớờởỡợúùủũụưứừửữựýỳỷỹỵ]*)$/u;
+                const name = $('#input_Name').val();
+                if (name === '') {
+                    $('#errName').text('Họ Tên Không Được Để Trống');
+                    return false;
+                } else if (!regex.test(name)) {
+                    $('#errName').text('Chữ Cái Đầu Phải Viết Hoa');
+                    return false;
+                } else {
+                    $('#errName').text('* Họ Tên Hợp Lệ');
+                    return true;
+                }
+            }
+            $('#input_Name').blur(checkName);
+
+            function checkPhone() {
+                const regex = /^(09|03|08)[0-9]{8}$/;
+                const phone = $('#input_Phone').val();
+                if (phone === '') {
+                    $('#errPhone').text('Số Điện Thoại Không Được Để Trống');
+                    return false;
+                } else if (!regex.test(phone)) {
+                    $('#errPhone').text('Số Điện Thoại Phải Là Đầu 09|03|08');
+                    return false;
+                } else {
+                    $('#errPhone').text('* Số Điện Thoại Hợp Lệ');
+                    return true;
+                }
+            }
+            $('#input_Phone').blur(checkPhone);
+
+            function checkEmail() {
+                const regexEmail = /\w+@gmail\.com/;
+                const email = $('#input_Email').val();
+                if (email === '') {
+                    $('#errEmail').text('Email Không Để Rỗng');
+                    return false;
+                } else if (!regexEmail.test(email)) {
+                    $('#errEmail').text('Email Không Hợp Lệ');
+                    return false;
+                } else {
+                    $('#errEmail').text('* Email Hợp Lệ');
+                    return true;
+                }
+            }
+            $('#input_Email').blur(checkEmail);
+
+            function checkAddress() {
+                const diachi = $('#input_Address').val();
+                if (diachi === '') {
+                    $('#errAddress').text('Địa chỉ không được để trống');
+                    return false;
+                } else {
+                    $('#errAddress').text('* Địa chỉ hợp lệ');
+                    return true;
+                }
+            }
+            $('#input_Address').blur(checkAddress);
+
+            function checkTaikhoan() {
+                const regexTaikhoan = /^[a-zA-Z0-9]{4,16}$/;
+                const taikhoan = $('#input_Taikhoan').val();
+                if (taikhoan === '') {
+                    $('#errTaikhoan').text('Vui Lòng Nhập Tài Khoản');
+                    return false;
+                } else if (!regexTaikhoan.test(taikhoan)) {
+                    $('#errTaikhoan').text('Tài Khoản Không Hợp Lệ');
+                    return false;
+                } else {
+                    $('#errTaikhoan').text('* Tài Khoản Hợp Lệ');
+                    return true;
+                }
+            }
+            $('#input_Taikhoan').blur(checkTaikhoan);
+
+            function checkPass() {
+                const regexPass = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+                const passWord = $('#input_Password').val();
+                if (passWord === '') {
+                    $('#errPassword').text('Vui Lòng Nhập Mật Khẩu');
+                    return false;
+                } else if (!regexPass.test(passWord)) {
+                    $('#errPassword').text('Mật Khẩu Phải Có Ít Nhất 8 Ký Tự, Bao Gồm Chữ và Số');
+                    return false;
+                } else {
+                    $('#errPassword').text('* Mật Khẩu Hợp Lệ');
+                    return true;
+                }
+            }
+            $('#input_Password').blur(checkPass);
+
+            function checkRepeat() {
+                const repeatPass = $('#input_Repeatpass').val();
+                if (repeatPass === $('#input_Password').val()) {
+                    $('#errRepeatpass').text('* Mật Khẩu Hợp Lệ');
+                    return true;
+                } else {
+                    $('#errRepeatpass').text('Mật Khẩu Không Hợp Lệ');
+                    return false;
+                }
+            }
+            $('#input_Repeatpass').blur(checkRepeat);
+
+            function saveAccount(name, phone, email, address, taikhoan, password) {
+                let accounts = JSON.parse(localStorage.getItem('accounts')) || [];
+                if (accounts.some(account => account.taikhoan === taikhoan)) {
+                    alert('Tài khoản đã tồn tại!');
+                    return false;
+                }
+                accounts.push({ name, phone, email, address, taikhoan, password });
+                localStorage.setItem('accounts', JSON.stringify(accounts));
+                return true;
+            }
+
+            $('#btn_submit').on('click', function(e) {
+                e.preventDefault();
+                if (checkName() && checkPhone() && checkEmail() && checkAddress() && checkTaikhoan() && checkPass() && checkRepeat()) {
+                    const name = $('#input_Name').val();
+                    const phone = $('#input_Phone').val();
+                    const email = $('#input_Email').val();
+                    const address = $('#input_Address').val();
+                    const taikhoan = $('#input_Taikhoan').val();
+                    const password = $('#input_Password').val();
+                    if (saveAccount(name, phone, email, address, taikhoan, password)) {
+                        alert('Đăng Ký Thành Công!');
+                        $('#modalDangKy').modal('hide');
+                        $('#input_Name, #input_Phone, #input_Email, #input_Address, #input_Taikhoan, #input_Password, #input_Repeatpass').val('');
+                        $('#errName, #errPhone, #errEmail, #errAddress, #errTaikhoan, #errPassword, #errRepeatpass').text('*');
+                    }
+                } else {
+                    alert('Vui lòng kiểm tra lại thông tin!');
+                }
+            });
+
+            displayCart();
+            checkLoginStatus();
+        });
+    </script>
+</body>
+</html>

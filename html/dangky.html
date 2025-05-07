@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng Ký - Xe Đạp Điện BLANC</title>
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/fontawesome.css">
+    <script src="../js/bootstrap.bundle.min.js"></script>
+    <script src="../js/jquery-3.7.1.min.js"></script>
+
+    <style>
+        @font-face {
+            font-family: 'Font Awesome 6 Free';
+            font-style: normal;
+            font-weight: 900;
+            src: url('../css/webfonts/fa-solid-900.woff2') format('woff2'),
+                 url('../css/webfonts/fa-solid-900.ttf') format('ttf');
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #e0eafc, #cfdef3);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 550px;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            margin: 20px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+
+        .form-group {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.9rem;
+            color: #333;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        .form-group .input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px 10px 10px 40px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input.valid {
+            border-color: #28a745;
+        }
+
+        .form-group input.invalid {
+            border-color: #dc3545;
+        }
+
+        .form-group i {
+            position: absolute;
+            left: 12px;
+            color: #666;
+            font-size: 1rem;
+        }
+
+        .form-group .text-danger {
+            font-size: 0.8rem;
+            color: #dc3545;
+            margin-top: 5px;
+            display: block;
+        }
+
+        .form-group .text-success {
+            font-size: 0.8rem;
+            color: #28a745;
+            margin-top: 5px;
+            display: block;
+        }
+
+        .password-strength {
+            font-size: 0.8rem;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .btn-submit {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        .btn-submit:hover {
+            background: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        .btn-submit:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+        }
+
+        .btn-back {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            color: #007bff;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .btn-back:hover {
+            color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Đăng Ký Thông Tin</h2>
+        <form id="register-form">
+            <div class="form-group">
+                <label for="input_Name">Họ Và Tên</label>
+                <div class="input-wrapper">
+                    <i class="fa-solid fa-user"></i>
+                    <input type="text" name="input_Name" id="input_Name">
+                </div>
+                <span id="errName" class="text-danger">*</span>
+            </div>
+            <div class="form-group">
+                <label for="input_Phone">Số Điện Thoại</label>
+                <div class="input-wrapper">
+                    <i class="fa-solid fa-phone"></i>
+                    <input type="text" name="input_Phone" id="input_Phone">
+                </div>
+                <span id="errPhone" class="text-danger">*</span>
+            </div>
+            <div class="form-group">
+                <label for="input_Email">Email</label>
+                <div class="input-wrapper">
+                    <i class="fa-solid fa-envelope"></i>
+                    <input type="text" name="input_Email" id="input_Email">
+                </div>
+                <span id="errEmail" class="text-danger">*</span>
+            </div>
+            <div class="form-group">
+                <label for="input_Address">Địa Chỉ</label>
+                <div class="input-wrapper">
+                    <i class="fa-solid fa-map-marker-alt"></i>
+                    <input type="text" name="input_Address" id="input_Address">
+                </div>
+                <span id="errAddress" class="text-danger">*</span>
+            </div>
+            <div class="form-group">
+                <label for="input_Taikhoan">Tài Khoản</label>
+                <div class="input-wrapper">
+                    <i class="fa-solid fa-user-circle"></i>
+                    <input type="text" name="input_Taikhoan" id="input_Taikhoan">
+                </div>
+                <span id="errTaikhoan" class="text-danger">*</span>
+            </div>
+            <div class="form-group">
+                <label for="input_Password">Mật khẩu</label>
+                <div class="input-wrapper">
+                    <i class="fa-solid fa-lock"></i>
+                    <input type="password" name="input_Password" id="input_Password">
+                </div>
+                <span id="errPassword" class="text-danger">*</span>
+                <span id="passwordStrength" class="password-strength"></span>
+            </div>
+            <div class="form-group">
+                <label for="input_Repeatpass">Nhập lại mật khẩu</label>
+                <div class="input-wrapper">
+                    <i class="fa-solid fa-lock"></i>
+                    <input type="password" name="input_Repeatpass" id="input_Repeatpass">
+                </div>
+                <span id="errRepeatpass" class="text-danger">*</span>
+            </div>
+            <button type="submit" class="btn-submit" id="btn_submit">Đăng Ký</button>
+        </form>
+        <a href="../html/trangchu.html" class="btn-back">Quay lại Trang Chủ</a>
+    </div>
+
+    <script>
+        $(document).ready(function(){
+            function checkName() {
+                const regex = /^([A-ZĐÂĂÊÔƠƯÁÀẢÃẠẮẰẲẴẶẤẦẨẪẬÉÈẺẼẸÍÌỈĨỊÓÒỎÕỌỐỒỔỖỘỚỜỞỠỢÚÙỦŨỤÝỲỶỸỴ][a-záàảãạăắằẳẵặâấầẩẫậêéèẻẽẹếềểễệíìỉĩịóòỏõọôốồổỗộơớờởỡợúùủũụưứừửữựýỳỷỹỵ]+(\s)*)*([A-ZĐÂĂÊÔƠƯÁÀẢÃẠẮẰẲẴẶẤẦẨẪẬÉÈẺẼẸÍÌỈĨỊÓÒỎÕỌỐỒỔỖỘỚỜỞỠỢÚÙỦŨỤÝỲỶỸỴ][a-záàảãạăắằẳẵặâấầẩẫậêéèẻẽẹếềểễệíìỉĩịóòỏõọôốồổỗộơớờởỡợúùủũụưứừửữựýỳỷỹỵ]*)$/u;
+                const name = $('#input_Name').val();
+                if (name === '') {
+                    $('#errName').text('Họ Tên Không Được Để Trống').removeClass('text-success').addClass('text-danger');
+                    $('#input_Name').removeClass('valid').addClass('invalid');
+                    return false;
+                } else if (!regex.test(name)) {
+                    $('#errName').text('Chữ Cái Đầu Phải Viết Hoa').removeClass('text-success').addClass('text-danger');
+                    $('#input_Name').removeClass('valid').addClass('invalid');
+                    return false;
+                } else {
+                    $('#errName').text('Họ Tên Hợp Lệ').removeClass('text-danger').addClass('text-success');
+                    $('#input_Name').removeClass('invalid').addClass('valid');
+                    return true;
+                }
+            }
+            $('#input_Name').on('blur input', checkName);
+
+            function checkPhone() {
+                const regex = /^(09|03|08)[0-9]{8}$/;
+                const phone = $('#input_Phone').val();
+                if (phone === '') {
+                    $('#errPhone').text('Số Điện Thoại Không Được Để Trống').removeClass('text-success').addClass('text-danger');
+                    $('#input_Phone').removeClass('valid').addClass('invalid');
+                    return false;
+                } else if (!regex.test(phone)) {
+                    $('#errPhone').text('Số Điện Thoại Phải Là Đầu 09|03|08').removeClass('text-success').addClass('text-danger');
+                    $('#input_Phone').removeClass('valid').addClass('invalid');
+                    return false;
+                } else {
+                    $('#errPhone').text('Số Điện Thoại Hợp Lệ').removeClass('text-danger').addClass('text-success');
+                    $('#input_Phone').removeClass('invalid').addClass('valid');
+                    return true;
+                }
+            }
+            $('#input_Phone').on('blur input', checkPhone);
+
+            function checkEmail() {
+                const regexEmail = /\w+@gmail\.com/;
+                const email = $('#input_Email').val();
+                if (email === '') {
+                    $('#errEmail').text('Email Không Để Rỗng').removeClass('text-success').addClass('text-danger');
+                    $('#input_Email').removeClass('valid').addClass('invalid');
+                    return false;
+                } else if (!regexEmail.test(email)) {
+                    $('#errEmail').text('Email Không Hợp Lệ').removeClass('text-success').addClass('text-danger');
+                    $('#input_Email').removeClass('valid').addClass('invalid');
+                    return false;
+                } else {
+                    $('#errEmail').text('Email Hợp Lệ').removeClass('text-danger').addClass('text-success');
+                    $('#input_Email').removeClass('invalid').addClass('valid');
+                    return true;
+                }
+            }
+            $('#input_Email').on('blur input', checkEmail);
+
+            function checkAddress() {
+                const diachi = $('#input_Address').val();
+                if (diachi === '') {
+                    $('#errAddress').text('Địa chỉ không được để trống').removeClass('text-success').addClass('text-danger');
+                    $('#input_Address').removeClass('valid').addClass('invalid');
+                    return false;
+                } else {
+                    $('#errAddress').text('Địa chỉ hợp lệ').removeClass('text-danger').addClass('text-success');
+                    $('#input_Address').removeClass('invalid').addClass('valid');
+                    return true;
+                }
+            }
+            $('#input_Address').on('blur input', checkAddress);
+
+            function checkTaikhoan() {
+                const regexTaikhoan = /^[a-zA-Z0-9]{4,16}$/;
+                const taikhoan = $('#input_Taikhoan').val();
+                if (taikhoan === '') {
+                    $('#errTaikhoan').text('Vui Lòng Nhập Tài Khoản').removeClass('text-success').addClass('text-danger');
+                    $('#input_Taikhoan').removeClass('valid').addClass('invalid');
+                    return false;
+                } else if (!regexTaikhoan.test(taikhoan)) {
+                    $('#errTaikhoan').text('Tài Khoản Không Hợp Lệ').removeClass('text-success').addClass('text-danger');
+                    $('#input_Taikhoan').removeClass('valid').addClass('invalid');
+                    return false;
+                } else {
+                    $('#errTaikhoan').text('Tài Khoản Hợp Lệ').removeClass('text-danger').addClass('text-success');
+                    $('#input_Taikhoan').removeClass('invalid').addClass('valid');
+                    return true;
+                }
+            }
+            $('#input_Taikhoan').on('blur input', checkTaikhoan);
+
+            function checkPass() {
+                const regexPass = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+                const passWord = $('#input_Password').val();
+                if (passWord === '') {
+                    $('#errPassword').text('Vui Lòng Nhập Mật Khẩu').removeClass('text-success').addClass('text-danger');
+                    $('#input_Password').removeClass('valid').addClass('invalid');
+                    $('#passwordStrength').text('');
+                    return false;
+                } else if (!regexPass.test(passWord)) {
+                    $('#errPassword').text('Mật Khẩu Phải Có Ít Nhất 8 Ký Tự, Bao Gồm Chữ và Số').removeClass('text-success').addClass('text-danger');
+                    $('#input_Password').removeClass('valid').addClass('invalid');
+                    $('#passwordStrength').text('Mật khẩu yếu').css('color', '#dc3545');
+                    return false;
+                } else {
+                    $('#errPassword').text('Mật Khẩu Hợp Lệ').removeClass('text-danger').addClass('text-success');
+                    $('#input_Password').removeClass('invalid').addClass('valid');
+                    $('#passwordStrength').text('Mật khẩu mạnh').css('color', '#28a745');
+                    return true;
+                }
+            }
+            $('#input_Password').on('blur input', checkPass);
+
+            function checkRepeat() {
+                const repeatPass = $('#input_Repeatpass').val();
+                if (repeatPass === $('#input_Password').val() && repeatPass !== '') {
+                    $('#errRepeatpass').text('Mật Khẩu Hợp Lệ').removeClass('text-danger').addClass('text-success');
+                    $('#input_Repeatpass').removeClass('invalid').addClass('valid');
+                    return true;
+                } else {
+                    $('#errRepeatpass').text('Mật Khẩu Không Hợp Lệ').removeClass('text-success').addClass('text-danger');
+                    $('#input_Repeatpass').removeClass('valid').addClass('invalid');
+                    return false;
+                }
+            }
+            $('#input_Repeatpass').on('blur input', checkRepeat);
+
+            function saveAccount(name, phone, email, address, taikhoan, password) {
+                let accounts = JSON.parse(localStorage.getItem('accounts')) || [];
+                if (accounts.some(account => account.taikhoan === taikhoan)) {
+                    alert('Tài khoản đã tồn tại!');
+                    return false;
+                }
+                const newAccount = { name, phone, email, address, taikhoan, password };
+                accounts.push(newAccount);
+                localStorage.setItem('accounts', JSON.stringify(accounts));
+                // Automatically log in the user
+                localStorage.setItem('currentUser', JSON.stringify(newAccount));
+                return true;
+            }
+
+            $('#register-form').on('submit', function(e) {
+                e.preventDefault();
+                $('#btn_submit').prop('disabled', true).text('Đang xử lý...');
+                if (checkName() && checkPhone() && checkEmail() && checkAddress() && checkTaikhoan() && checkPass() && checkRepeat()) {
+                    const name = $('#input_Name').val();
+                    const phone = $('#input_Phone').val();
+                    const email = $('#input_Email').val();
+                    const address = $('#input_Address').val();
+                    const taikhoan = $('#input_Taikhoan').val();
+                    const password = $('#input_Password').val();
+                    if (saveAccount(name, phone, email, address, taikhoan, password)) {
+                        alert('Đăng Ký Thành Công! Bạn đã được đăng nhập.');
+                        window.location.href = '../html/trangchu.html';
+                    }
+                } else {
+                    alert('Vui lòng kiểm tra lại thông tin!');
+                    $('#btn_submit').prop('disabled', false).text('Đăng Ký');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

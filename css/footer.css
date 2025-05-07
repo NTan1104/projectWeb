@@ -1,0 +1,28 @@
+footer{
+    text-align: center;
+    color: orange;
+    background-color: black;
+    margin-top:100px ;
+    padding-top: 20px;
+}
+footer ul { 
+    list-style:none;
+} 
+footer .col-sm-3 img{
+    width: 160px;
+    height: 60px;
+}
+footer .col-sm-2 img{
+    margin-left: 60px;
+    margin-bottom: 20px;
+    width: 200px;
+    height: 200px;
+}
+footer ul li a{
+    text-decoration: none;
+    color: orange;
+}
+footer ul li a:hover{
+    cursor: pointer;
+    border-bottom: 1px solid red  ;
+}

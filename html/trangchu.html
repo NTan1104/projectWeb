@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Chủ - Xe Đạp Điện BLANC</title>
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/fontawesome.css">
+    <script src="../js/bootstrap.bundle.min.js"></script>
+    <script src="../js/jquery-3.7.1.min.js"></script>
+
+    <style>
+        @font-face {
+            font-family: 'Font Awesome 6 Free';
+            font-style: normal;
+            font-weight: 900;
+            src: url('../css/webfonts/fa-solid-900.woff2') format('woff2'),
+                 url('../css/webfonts/fa-solid-900.ttf') format('ttf');
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #007bff, #00d4ff);
+            padding: 15px 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        header h1 {
+            color: white;
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin: 0;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        header ul {
+            display: flex;
+            gap: 15px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        header ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        header ul li a:hover {
+            color: #ffd700;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .header-actions input[type="text"] {
+            padding: 6px 12px;
+            border-radius: 20px;
+            border: none;
+            outline: none;
+            width: 180px;
+            font-size: 0.85rem;
+        }
+
+        .header-actions i {
+            font-size: 1.1rem;
+            cursor: pointer;
+            color: white;
+            transition: transform 0.3s ease;
+        }
+
+        .header-actions i:hover {
+            transform: scale(1.15);
+        }
+
+        .auth-buttons .btn-auth {
+            padding: 6px 12px;
+            border-radius: 5px;
+            font-size: 0.85rem;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            transition: background-color 0.3s;
+            text-decoration: none;
+        }
+
+        .auth-buttons .btn-auth:hover {
+            background-color: #0056b3;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            color: white;
+            font-size: 0.85rem;
+            gap: 8px;
+        }
+
+        .user-info span {
+            max-width: 120px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .logout-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 0.85rem;
+            cursor: pointer;
+            padding: 6px 12px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            background-color: #dc3545;
+        }
+
+        /* Main Content */
+        main {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 15px;
+        }
+
+        main h2 {
+            text-align: center;
+            color: #333;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .product-item {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+
+        .product-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .product-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .product-item p {
+            margin: 10px;
+            text-align: center;
+            font-size: 1rem;
+            color: #333;
+        }
+
+        .product-item p:first-of-type {
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .product-item p:last-of-type {
+            color: #e74c3c;
+            font-weight: 500;
+        }
+
+        .product-item .btn-add-to-cart {
+            display: block;
+            margin: 10px auto;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border-radius: 20px;
+            background: #007bff;
+            border: none;
+            color: white;
+            transition: background 0.3s ease;
+        }
+
+        .product-item .btn-add-to-cart:hover {
+            background: #0056b3;
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: white;
+            padding: 30px 0;
+            margin-top: 40px;
+        }
+
+        footer .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 2fr 1.5fr 1fr;
+            gap: 20px;
+        }
+
+        footer ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        footer ul li {
+            margin-bottom: 8px;
+        }
+
+        footer ul li a {
+            color: #ddd;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        footer ul li a:hover {
+            color: #007bff;
+        }
+
+        footer h5 {
+            color: #007bff;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+        }
+
+        footer img {
+            max-width: 200px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>BLANC</h1>
+            <ul>
+                <li><a href="../html/trangchu.html">TRANG CHỦ</a></li>
+                <li><a href="../html/video.html">VIDEO</a></li>
+                <li><a href="../html/sanpham1.html">SẢN PHẨM</a></li>
+                <li><a href="../html/review.html">REVIEW</a></li>
+                <li><a href="../html/gioithieu.html">GIỚI THIỆU</a></li>
+                <li><a href="../html/lienhe.html">LIÊN HỆ</a></li>
+            </ul>
+            <div class="header-actions">
+                <input type="text" placeholder="Tìm kiếm xe đạp...">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <a href="../html/giohang.html"><i class="fas fa-shopping-cart"></i></a>
+                <div id="auth-buttons" class="auth-buttons">
+                    <a href="../html/dangky.html" class="btn-auth">Đăng Ký</a>
+                    <a href="../html/dangnhap.html" class="btn-auth">Đăng Nhập</a>
+                </div>
+                <div id="user-info" class="user-info" style="display: none;">
+                    <span id="user-name"></span>
+                    <span id="user-email"></span>
+                    <button class="logout-btn" id="logout-btn">Đăng Xuất</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <h2>Xe Đạp Điện Nổi Bật</h2>
+        <div class="row" id="product-list">
+            <!-- Sản phẩm sẽ được thêm bằng JavaScript -->
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div>
+                <img src="../img/footerlogo.webp" alt="Logo">
+            </div>
+            <div>
+                <ul>
+                    <li><h5>HỘ KINH DOANH BLANC BIKE</h5></li>
+                    <li>GPKD số: 58A8011955</li>
+                    <li>Ngày cấp: 01/10/2021</li>
+                    <li>Cấp bởi: UBND TP Trà Vinh</li>
+                    <li><i class="fa-solid fa-landmark"></i> 77 Điện Biên Phủ, P.6, Trà Vinh</li>
+                    <li><i class="fa-solid fa-phone"></i> 0399297981</li>
+                    <li style="letter-spacing: 5px;">
+                        <i class="fa-brands fa-facebook"></i>
+                        <i class="fa-brands fa-yahoo"></i>
+                        <i class="fa-brands fa-twitter"></i>
+                        <i class="fa-brands fa-instagram"></i>
+                        <i class="fa-brands fa-youtube"></i>
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <ul>
+                    <h5>HỖ TRỢ KHÁCH HÀNG</h5>
+                    <li><a href="../html/baomat.html">Chính sách bảo mật</a></li>
+                    <li><a href="../html/vanchuyen.html">Chính sách vận chuyển</a></li>
+                    <li><a href="../html/doitra.html">Chính sách đổi trả</a></li>
+                    <li><a href="../html/hinhthucthanhtoan.html">Hình thức thanh toán</a></li>
+                    <li><a href="http://online.gov.vn/Home/WebDetails/73279" target="_blank"><img src="../img/BCT.webp" alt=""></a></li>
+                </ul>
+            </div>
+            <div>
+                <ul>
+                    <h5>HƯỚNG DẪN</h5>
+                    <li><a href="../html/muahang.html">Hướng dẫn mua hàng</a></li>
+                    <li><a href="../html/muahang.html">Hướng dẫn thanh toán</a></li>
+                    <li><a href="../html/muahang.html">Hướng dẫn giao nhận</a></li>
+                    <li><a href="../html/dieukhoandichvu.html">Điều khoản dịch vụ</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        $(document).ready(function(){
+            const MAX_QUANTITY = 10;
+
+            const product2 = [
+                { id: 1, name: "Xe Đạp Điện VinFast Ludo", price: 12.9, image: "../img/Trang/1.webp", description: "Xe đạp điện VinFast Ludo với thiết kế nhỏ gọn, pin lithium-ion, quãng đường 70km." },
+                { id: 2, name: "Xe Đạp Điện Honda A6", price: 15.5, image: "../img/trangchu/2.webp", description: "Honda A6 mạnh mẽ, động cơ 350W, tốc độ tối đa 25km/h." },
+                { id: 3, name: "Xe Đạp Điện Yamaha Neo", price: 18.7, image: "../img/trangchu/3.webp", description: "Yamaha Neo phong cách hiện đại, pin bền bỉ, phù hợp đô thị." },
+                { id: 4, name: "Xe Đạp Điện Super 73", price: 22.3, image: "../img/trangchu/4.webp", description: "Super 73 với thiết kế cổ điển, động cơ mạnh mẽ, quãng đường 80km." },
+                { id: 5, name: "Xe Đạp Điện Bridgestone SLI", price: 14.2, image: "../img/trangchu/5.webp", description: "Bridgestone SLI nhẹ nhàng, tiết kiệm năng lượng, phù hợp học sinh." },
+                { id: 6, name: "Xe Đạp Điện Asama EBK", price: 16.8, image: "../img/trangchu/6.webp", description: "Asama EBK bền bỉ, pin sạc nhanh, phù hợp mọi lứa tuổi." },
+                { id: 7, name: "Xe Đạp Điện Giant M133", price: 19.5, image: "../img/trangchu/7.webp", description: "Giant M133 với khung hợp kim nhôm, vận hành êm ái." },
+                { id: 8, name: "Xe Đạp Điện Panasonic Jetter", price: 21.0, image: "../img/trangchu/8.webp", description: "Panasonic Jetter cao cấp, động cơ mạnh, quãng đường 90km." },
+            ];
+
+            if (!localStorage.getItem('product2')) {
+                localStorage.setItem('product2', JSON.stringify(product2));
+            }
+            
+            function displayProducts() {
+                const productList = $('#product-list');
+                productList.empty();
+                const storedProducts = JSON.parse(localStorage.getItem('product2'));
+                storedProducts.forEach(product => {
+                    productList.append(`
+                        <div class="col-sm-3 product-item" data-id="${product.id}">
+                            <img src="${product.image}" alt="${product.name}">
+                            <p>${product.name}</p>
+                            <p>${product.price} triệu VNĐ</p>
+                            <button class="btn btn-primary btn-add-to-cart" data-id="${product.id}">Thêm vào giỏ hàng</button>
+                        </div>
+                    `);
+                });
+            }
+
+            $(document).on('click', '.product-item', function(e) {
+                if (!$(e.target).hasClass('btn-add-to-cart')) {
+                    const productId = $(this).data('id');
+                    localStorage.setItem('selectedProductId', productId);
+                    window.location.href = '../html/chitiet_sanpham.html';
+                }
+            });
+
+            $(document).on('click', '.btn-add-to-cart', function() {
+                const productId = $(this).data('id');
+                const product = JSON.parse(localStorage.getItem('product2')).find(p => p.id == productId);
+
+                let cart = JSON.parse(localStorage.getItem('cart')) || [];
+                const existingItem = cart.find(item => item.id == product.id);
+                if (existingItem) {
+                    if (existingItem.quantity >= MAX_QUANTITY) {
+                        alert(`Số lượng tối đa cho ${product.name} là ${MAX_QUANTITY}!`);
+                        return;
+                    }
+                    existingItem.quantity += 1;
+                } else {
+                    cart.push({
+                        id: product.id,
+                        name: product.name,
+                        price: product.price,
+                        image: product.image,
+                        quantity: 1
+                    });
+                }
+
+                localStorage.setItem('cart', JSON.stringify(cart));
+                alert(`${product.name} đã được thêm vào giỏ hàng!`);
+            });
+
+            function checkLoginStatus() {
+                const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+                if (currentUser) {
+                    $('#auth-buttons').hide();
+                    $('#user-info').show();
+                    $('#user-name').text(currentUser.name);
+                    $('#user-email').text(currentUser.email);
+                } else {
+                    $('#auth-buttons').show();
+                    $('#user-info').hide();
+                }
+            }
+
+            $('#logout-btn').on('click', function() {
+                localStorage.removeItem('currentUser');
+                $('#auth-buttons').show();
+                $('#user-info').hide();
+                $('#user-name').text('');
+                $('#user-email').text('');
+                alert('Đăng Xuất Thành Công!');
+            });
+
+            displayProducts();
+            checkLoginStatus();
+        });
+    </script>
+</body>
+</html>

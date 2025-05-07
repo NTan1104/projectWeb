@@ -1,0 +1,22 @@
+header{
+    color: white;
+    width: 100%;
+    height: 80px;
+    background-color: black;
+    padding: 0;
+}
+.col-sm-5 ul{
+    display: flex;
+    list-style: none;
+}
+.col-sm-5 ul li{
+    margin-top: 30px;
+    margin-right: 20px;
+}
+.col-sm-5 ul li a{
+    text-decoration: none;
+    color: orange;
+}
+.col-sm-5 ul li a :hover{
+    color: greenyellow;
+}
